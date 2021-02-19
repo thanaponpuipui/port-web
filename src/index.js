@@ -10,16 +10,20 @@ app.use(express.static("public"))
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.render("index");
+    res.render("pub/index", {title: "index"});
 });
 
 app.get("/gallery", (req, res) => {
-    res.render("gallery", {test: "this is test data."});
+    res.render("pub/gallery", {title: "this is test data."});
 });
 
 app.get("/board", (req, res) => {
-    res.render("board", {test: "this is also test data."});
+    res.render("pub/board", {title: "this is also test data."});
 });
+
+const adminRouter = require("./routers/admin")
+
+app.use("/admin", adminRouter)
 
 app.listen(port, () => {
     console.log("server is runing on port " + port)
